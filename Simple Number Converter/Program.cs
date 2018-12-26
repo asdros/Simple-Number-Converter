@@ -5,7 +5,7 @@ namespace SimpleNumberConverter
     public class Core
     {
 
-        public static string ConvertTo(int value, int newBase)
+        public static string ConvertTo(int value, int newBase) //
         {
             string Chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string result = "";
@@ -23,12 +23,13 @@ namespace SimpleNumberConverter
             return result;
         }
 
-        public static int ConvertFrom(string number, int oldBase)
+        public static int ConvertFrom(string number, int oldBase) //this function returns a number converted into decimal number system
         {
             const int ASCII_LETTER_TO_VALUE = 55;
             const int ASCII_DIGIT_TO_VALUE = 48;
             int power = 0;
             int sum = 0;
+         
 
             foreach (char digit in number)
             {
@@ -50,21 +51,19 @@ namespace SimpleNumberConverter
 
             return sum;
         }
-        public static void Input(int firstBase, int secondBase)
+        public static void Input(int firstBase, int secondBase, string numberToConvert)
         {
             Console.Clear();
-            Console.WriteLine("\n\nPodaj liczbę w systemie " + firstBase + "-owym do przeliczenia: ");
-            string temp = Console.ReadLine();
-            int nvalue = Convert.ToInt32(temp);
+                
+            int temp = Convert.ToInt32(numberToConvert);
             if (firstBase == 10)
             {
-                string dwa = ConvertTo(nvalue, secondBase);
+                string dwa = ConvertTo(temp, secondBase);
                 Console.WriteLine("\n\n {0}\n\n", dwa);
             }
             else
             {
-
-                int jeden = ConvertFrom(nvalue.ToString(), firstBase);
+                int jeden = ConvertFrom(numberToConvert, firstBase);
                 string dwa = ConvertTo(jeden, secondBase);
                 Console.WriteLine("\n\n {0}\n\n", dwa);
             }
@@ -82,10 +81,16 @@ namespace SimpleNumberConverter
                 {                   
                     case ConsoleKey.D1:
                         Console.Clear();
-                        Console.WriteLine("\nPodaj początkowy system, a następnie finalny");
+                        Console.WriteLine("\nPodaj liczbę początkowego systemu liczbowego. ");
                         int firstBase = Convert.ToInt32(Console.ReadLine());
+
+                        Console.WriteLine("\n\nPodaj liczbę w systemie " + firstBase + "-owym do przeliczenia. ");
+                        string numberToConvert = Console.ReadLine();
+
+                        Console.WriteLine("\nPodaj liczbę finalnego systemu liczbowego. ");
                         int secondBase = Convert.ToInt32(Console.ReadLine());
-                        Input(firstBase, secondBase);
+
+                        Input(firstBase, secondBase,numberToConvert);
                         break;
                     case ConsoleKey.D2:
                         status = true;
