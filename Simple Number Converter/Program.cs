@@ -29,10 +29,12 @@ namespace SimpleNumberConverter
             const int ASCII_DIGIT_TO_VALUE = 48;
             int power = 0;
             int sum = 0;
-         
 
-            foreach (char digit in number)
+
+            for (int i = number.Length - 1; i >= 0; i--)           // read the number from the back
             {
+                char digit = number[i];  
+                
                 if (!(char.IsUpper(digit) || char.IsDigit(digit)))
                     throw new Exception($"znak {digit} jest po za zakresem!.");
 
@@ -55,9 +57,9 @@ namespace SimpleNumberConverter
         {
             Console.Clear();
                 
-            int temp = Convert.ToInt32(numberToConvert);
-            if (firstBase == 10)
+            if (firstBase == 10)                                                                
             {
+                int temp = Convert.ToInt32(numberToConvert);
                 string dwa = ConvertTo(temp, secondBase);
                 Console.WriteLine("\n\n {0}\n\n", dwa);
             }
@@ -75,7 +77,7 @@ namespace SimpleNumberConverter
             while (!status)
             {
                 Console.WriteLine("\nPrzelicznik systemów liczbowych o górnym zakresie "); //add the maximum range
-                Console.WriteLine("\n\t1 - Z \"dowolnego\" systemu na \"dowolnie\" inny\n\t2 - Koniec programu.");
+                Console.WriteLine("\n\t1 -  Przelicz liczbę\n\t2 - Koniec programu.");
                 ConsoleKeyInfo button = Console.ReadKey();
                 switch (button.Key)
                 {                   
