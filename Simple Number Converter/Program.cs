@@ -5,7 +5,7 @@ namespace SimpleNumberConverter
     public class Core
     {
 
-        public static string ConvertTo(int value, int newBase) //
+        public static string ConvertTo(int value, byte newBase) // this function returns a number coverted from the decimal number system
         {
             string Chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             string result = "";
@@ -17,23 +17,24 @@ namespace SimpleNumberConverter
             while (value > 0)
             {
                 result = Chars[value % newBase] + result;
-                Console.WriteLine("\t\t" + value + "\t/\t" + newBase + " | " + result[remainder]);
+                
+                Console.WriteLine($"\t\t {value} \t/\t {newBase} | {result[remainder]}");
                 value /= newBase;
             }
             return result;
         }
 
-        public static int ConvertFrom(string number, int oldBase) //this function returns a number converted into decimal number system
+        public static int ConvertFrom(string number, int oldBase) //this function returns a number converted into the decimal number system
         {
-            const int ASCII_LETTER_TO_VALUE = 55;
-            const int ASCII_DIGIT_TO_VALUE = 48;
+            const byte ASCII_LETTER_TO_VALUE = 55;
+            const byte ASCII_DIGIT_TO_VALUE = 48;
             int power = 0;
             int sum = 0;
 
 
             for (int i = number.Length - 1; i >= 0; i--)           // read the number from the back
             {
-                char digit = number[i];  
+                char digit = number[i];                         // keep the one digit of number
                 
                 if (!(char.IsUpper(digit) || char.IsDigit(digit)))
                     throw new Exception($"znak {digit} jest po za zakresem!.");
@@ -49,25 +50,27 @@ namespace SimpleNumberConverter
 
                 power = power + 1;
             }
-            Console.WriteLine("\t\n\nWynik pośredni, dziesiętnie: {0}\n\n", sum);
+            Console.WriteLine($"\t\n\nWynik pośredni, dziesiętnie: {sum}\n\n");
 
             return sum;
         }
-        public static void Input(int firstBase, int secondBase, string numberToConvert)
+        public static void Input(byte firstBase, byte secondBase, string numberToConvert)
         {
-            Console.Clear();
-                
+            int toDecimal;
+            string fromDecimal;
+            Console.Clear();          
+            
             if (firstBase == 10)                                                                
             {
                 int temp = Convert.ToInt32(numberToConvert);
-                string dwa = ConvertTo(temp, secondBase);
-                Console.WriteLine("\n\n {0}\n\n", dwa);
+                fromDecimal = ConvertTo(temp, secondBase);
+                Console.WriteLine($"\n\n {fromDecimal}\n\n");
             }
             else
             {
-                int jeden = ConvertFrom(numberToConvert, firstBase);
-                string dwa = ConvertTo(jeden, secondBase);
-                Console.WriteLine("\n\n {0}\n\n", dwa);
+                toDecimal = ConvertFrom(numberToConvert, firstBase);
+                fromDecimal= ConvertTo(toDecimal, secondBase);
+                Console.WriteLine($"\n\n {fromDecimal}\n\n");
             }
 
         }
@@ -78,19 +81,19 @@ namespace SimpleNumberConverter
             {
                 Console.WriteLine("\nPrzelicznik systemów liczbowych o górnym zakresie "); //add the maximum range
                 Console.WriteLine("\n\t1 -  Przelicz liczbę\n\t2 - Koniec programu.");
-                ConsoleKeyInfo button = Console.ReadKey();
+                ConsoleKeyInfo button = Console.ReadKey();                                 // read the button to select the switch case        
                 switch (button.Key)
                 {                   
                     case ConsoleKey.D1:
                         Console.Clear();
                         Console.WriteLine("\nPodaj liczbę początkowego systemu liczbowego. ");
-                        int firstBase = Convert.ToInt32(Console.ReadLine());
+                        byte firstBase = Convert.ToByte(Console.ReadLine());
 
                         Console.WriteLine("\n\nPodaj liczbę w systemie " + firstBase + "-owym do przeliczenia. ");
                         string numberToConvert = Console.ReadLine();
 
                         Console.WriteLine("\nPodaj liczbę finalnego systemu liczbowego. ");
-                        int secondBase = Convert.ToInt32(Console.ReadLine());
+                        byte secondBase = Convert.ToByte(Console.ReadLine());
 
                         Input(firstBase, secondBase,numberToConvert);
                         break;
