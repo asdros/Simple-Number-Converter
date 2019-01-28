@@ -37,12 +37,12 @@ namespace SimpleNumberConverter
                 char digit = number[i];                         // keep the one digit of number
                 
                 if (!(char.IsUpper(digit) || char.IsDigit(digit)))
-                    throw new Exception($"znak {digit} jest po za zakresem!.");
+                    throw new Exception($"The char {digit} is out of range!.");
 
                 int digitValue = char.IsDigit(digit) ? digit - ASCII_DIGIT_TO_VALUE : digit - ASCII_LETTER_TO_VALUE;
 
                 if (digitValue > (oldBase - 1))
-                    throw new Exception($"Wartość cyfrowa {digitValue} jest większa od cyfry podstawy!");
+                    throw new Exception($"The digital value {digitValue} is greatest than the base number!");
 
                 sum = sum + ((int)Math.Pow(oldBase, power) * digitValue);
 
@@ -50,7 +50,6 @@ namespace SimpleNumberConverter
 
                 power = power + 1;
             }
-            Console.WriteLine($"\t\n\nWynik pośredni, dziesiętnie: {sum}\n\n");
 
             return sum;
         }
@@ -79,20 +78,20 @@ namespace SimpleNumberConverter
             bool status = false;
             while (!status)
             {
-                Console.WriteLine("\nPrzelicznik systemów liczbowych o górnym zakresie "); //add the maximum range
-                Console.WriteLine("\n\t1 -  Przelicz liczbę\n\t2 - Koniec programu.");
+                Console.WriteLine("\nThe converter of numerical systems "); 
+                Console.WriteLine("\n\t1 -  Convert a number\n\t2 - End of program.");
                 ConsoleKeyInfo button = Console.ReadKey();                                 // read the button to select the switch case        
                 switch (button.Key)
                 {                   
                     case ConsoleKey.D1:
                         Console.Clear();
-                        Console.WriteLine("\nPodaj liczbę początkowego systemu liczbowego. ");
+                        Console.WriteLine("\nEnter the number of the initial number system. ");
                         byte firstBase = Convert.ToByte(Console.ReadLine());
 
-                        Console.WriteLine("\n\nPodaj liczbę w systemie " + firstBase + "-owym do przeliczenia. ");
+                        Console.WriteLine("\n\nEnter the number in the system " + firstBase + "to be converted. ");
                         string numberToConvert = Console.ReadLine();
 
-                        Console.WriteLine("\nPodaj liczbę finalnego systemu liczbowego. ");
+                        Console.WriteLine("\nEnter the number of the final number system. ");
                         byte secondBase = Convert.ToByte(Console.ReadLine());
 
                         Input(firstBase, secondBase,numberToConvert);
@@ -101,7 +100,7 @@ namespace SimpleNumberConverter
                         status = true;
                         break;
                     default:
-                        Console.WriteLine("\nNieprawidłowy wybór");
+                        Console.WriteLine("\nIncorrect choice.");
                         break;
                 }
             }
