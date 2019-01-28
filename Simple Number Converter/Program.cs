@@ -63,15 +63,14 @@ namespace SimpleNumberConverter
             {
                 int temp = Convert.ToInt32(numberToConvert);
                 fromDecimal = ConvertTo(temp, secondBase);
-                Console.WriteLine($"\n\n {fromDecimal}\n\n");
             }
             else
             {
                 toDecimal = ConvertFrom(numberToConvert, firstBase);
+                Console.WriteLine("\n\n");
                 fromDecimal= ConvertTo(toDecimal, secondBase);
-                Console.WriteLine($"\n\n {fromDecimal}\n\n");
             }
-
+            Console.WriteLine($"\n\n{numberToConvert}({firstBase}) = {fromDecimal}({secondBase})\n\n");
         }
         public static void Main()
         {
@@ -79,7 +78,7 @@ namespace SimpleNumberConverter
             while (!status)
             {
                 Console.WriteLine("\nThe converter of numerical systems "); 
-                Console.WriteLine("\n\t1 -  Convert a number\n\t2 - End of program.");
+                Console.WriteLine("\n\t1 - Convert a number\n\t2 - End of program.");
                 ConsoleKeyInfo button = Console.ReadKey();                                 // read the button to select the switch case        
                 switch (button.Key)
                 {                   
@@ -88,7 +87,7 @@ namespace SimpleNumberConverter
                         Console.WriteLine("\nEnter the number of the initial number system. ");
                         byte firstBase = Convert.ToByte(Console.ReadLine());
 
-                        Console.WriteLine("\n\nEnter the number in the system " + firstBase + "to be converted. ");
+                        Console.WriteLine("\n\nEnter the number in the system " + firstBase + " to be converted. ");
                         string numberToConvert = Console.ReadLine();
 
                         Console.WriteLine("\nEnter the number of the final number system. ");
@@ -104,6 +103,7 @@ namespace SimpleNumberConverter
                         break;
                 }
             }
+            Console.WriteLine();
         }
     }
 
