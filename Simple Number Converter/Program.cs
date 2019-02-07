@@ -82,7 +82,8 @@ namespace SimpleNumberConverter
                 ConsoleKeyInfo button = Console.ReadKey();                                 // read the button to select the switch case        
                 switch (button.Key)
                 {                   
-                    case ConsoleKey.D1:
+                    case ConsoleKey.D1: 
+                    case ConsoleKey.NumPad1:
                         Console.Clear();
                         Console.WriteLine("\nEnter the number of the initial number system. ");
                         byte firstBase = Convert.ToByte(Console.ReadLine());
@@ -96,6 +97,7 @@ namespace SimpleNumberConverter
                         Input(firstBase, secondBase,numberToConvert);
                         break;
                     case ConsoleKey.D2:
+                    case ConsoleKey.NumPad2:
                         status = true;
                         break;
                     default:
